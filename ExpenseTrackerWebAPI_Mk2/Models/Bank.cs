@@ -7,5 +7,9 @@
         public string AccNumber { get; set; }
         public double Balance { get; set; }
         public int Status { get; set; }
+
+        //One-to-many relations
+        public User User { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

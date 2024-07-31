@@ -17,5 +17,10 @@
         public int StatementGenDate { get; set; }
         public int PaymentDueIn { get; set; }
         public int Status { get; set; }
+
+        //One to many relations
+
+        public User User { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }
