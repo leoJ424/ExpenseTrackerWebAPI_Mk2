@@ -9,7 +9,7 @@
         public int RewardPoints { get; set; }
         public DateTime Date { get; set; }
         public string GeneralComments { get; set; }
-        public int Status { get; set; }
+        public bool Status { get; set; }
 
         //One to many relations
         public User User { get; set; }

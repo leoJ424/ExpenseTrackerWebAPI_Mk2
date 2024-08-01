@@ -8,7 +8,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int Status { get; set; }
+        public bool Status { get; set; }
 
         //One to many relations
         public ICollection<Bank> Banks { get; set; }

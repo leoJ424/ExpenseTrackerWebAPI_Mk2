@@ -16,7 +16,7 @@
         public double CreditLimit { get; set; }
         public int StatementGenDate { get; set; }
         public int PaymentDueIn { get; set; }
-        public int Status { get; set; }
+        public bool Status { get; set; }
 
         //One to many relations
 
