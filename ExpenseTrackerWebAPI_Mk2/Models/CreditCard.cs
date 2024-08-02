@@ -1,4 +1,6 @@
-﻿namespace ExpenseTrackerWebAPI_Mk2.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ExpenseTrackerWebAPI_Mk2.Models
 {
     public enum NetworkEnum
     {
@@ -22,12 +24,14 @@
         public DateTime ExpDate { get; set; }
         public int CVC { get; set; }
         public double CreditLimit { get; set; }
-        public int StatementGenDate { get; set; }
+        public int StatementGenDay { get; set; }
         public int PaymentDueIn { get; set; }
         public bool Status { get; set; }
 
-        //One to many relations
+        //Foreign Key
+        public Guid UserID { get; set; }
 
+        //One to many relations
         public User User { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
     }

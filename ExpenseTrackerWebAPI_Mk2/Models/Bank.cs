@@ -8,6 +8,9 @@
         public double Balance { get; set; }
         public bool Status { get; set; }
 
+        //Foreign Key
+        public Guid UserID { get; set; }
+
         //One-to-many relations
         public User User { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
