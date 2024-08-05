@@ -17,7 +17,7 @@
         public PaymentModeEnum PaymentMode { get; set; }
         public TransactionModeEnum TransactionMode { get; set; }
         public double Amount { get; set; }
-        public int? RewardPoints { get; set; }
+        public double? RewardPoints { get; set; }
         public DateTime Date { get; set; }
         public string? GeneralComments { get; set; }
         public bool Status { get; set; }
