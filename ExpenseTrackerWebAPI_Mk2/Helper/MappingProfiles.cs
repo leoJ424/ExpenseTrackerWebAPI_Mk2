@@ -9,7 +9,10 @@ namespace ExpenseTrackerWebAPI_Mk2.Helper
         public MappingProfiles()
         {
             CreateMap<Category, CategoryDto>();
+
             CreateMap<Recipient, RecipientDto>();
+            CreateMap<RecipientDto, Recipient>();
+
             CreateMap<CreditCard, CreditCardDto>();
         }
     }

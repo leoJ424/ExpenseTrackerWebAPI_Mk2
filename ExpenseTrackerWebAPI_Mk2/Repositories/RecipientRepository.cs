@@ -12,6 +12,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         {
             _context = context;
         }
+
         public ICollection<Recipient> GetAllRecipients()
         {
             return _context.Recipients.OrderBy(r => r.RecipientName).ToList();
@@ -35,6 +36,18 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         public bool RecipientExists(string recipientName)
         {
             return _context.Recipients.Any(r => r.RecipientName == recipientName && r.Status == true);
+        }
+
+        public bool CreateRecipient(Recipient recipient)
+        {
+            _context.Add(recipient);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

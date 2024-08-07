@@ -72,5 +72,41 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(recipientId);
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateRecipient([FromBody] RecipientDto recipientCreate)
+        {
+            if(recipientCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var recipient = _recipientRepository.GetAllRecipients()
+                                                .Where(r => r.RecipientName.Trim().ToUpper() == recipientCreate.RecipientName.Trim().ToUpper())
+                                                .FirstOrDefault();
+            if(recipient != null)
+            {
+                ModelState.AddModelError("", "Recipient already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var recipientMap = _mapper.Map<Recipient>(recipientCreate);
+            recipientMap.Status = true;//Set true by default. Otherwise false is set as default when object is created.
+
+            if(!_recipientRepository.CreateRecipient(recipientMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving.");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully Created");
+        }
+
     }
 }
