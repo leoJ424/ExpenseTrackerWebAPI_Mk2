@@ -16,6 +16,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Helper
 
             CreateMap<CreditCard, CreditCardDto>();
             CreateMap<CreditCardDto, CreditCard>();
+
+            CreateMap<TransactionDetailsDto, Transaction>();
         }
     }
 }

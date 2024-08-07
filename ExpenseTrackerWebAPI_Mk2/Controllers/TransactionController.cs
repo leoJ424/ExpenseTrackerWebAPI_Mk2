@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ExpenseTrackerWebAPI_Mk2.Dto;
 using ExpenseTrackerWebAPI_Mk2.Interfaces;
+using ExpenseTrackerWebAPI_Mk2.Models;
+using ExpenseTrackerWebAPI_Mk2.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTrackerWebAPI_Mk2.Controllers
@@ -10,11 +12,19 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
     public class TransactionController : Controller
     {
         private readonly ITransactionRepository _transactiontRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly ICreditCardRepository _creditCardRepository;
+        private readonly IRecipientRepository _recipientRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
 
-        public TransactionController(ITransactionRepository transactionRepository, IMapper mapper)
+        public TransactionController(ITransactionRepository transactionRepository,IUserRepository userRepository, ICreditCardRepository creditCardRepository, ICategoryRepository categoryRepository, IRecipientRepository recipientRepository, IMapper mapper)
         {
             _transactiontRepository = transactionRepository;
+            _userRepository = userRepository;
+            _creditCardRepository = creditCardRepository;
+            _categoryRepository = categoryRepository;
+            _recipientRepository = recipientRepository;
             _mapper = mapper;
         }
 
@@ -136,6 +146,104 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateTransaction([FromQuery] string userName, [FromQuery] string? cardName, [FromQuery] string? bankName, [FromBody] TransactionDetailsDto transactionDetails)
+        {          
+            if (transactionDetails == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var transactionMap = _mapper.Map<Transaction>(transactionDetails);
+            transactionMap.Status = true;
+
+            Guid userId = _userRepository.GetUserId(userName);
+            if (userId == Guid.Empty)
+            {
+                ModelState.AddModelError("", "User does not exist");
+                return StatusCode(422, ModelState);
+            }   
+            transactionMap.UserID = userId;
+
+            Guid categoryId = _categoryRepository.GetCategoryId(transactionDetails.CategoryName);
+            if (categoryId == Guid.Empty)
+            {
+                ModelState.AddModelError("", "Category does not exist");
+                return StatusCode(422, ModelState);
+            }
+            transactionMap.CategoryID = categoryId;
+
+            Guid recipientId = _recipientRepository.GetRecipientId(transactionDetails.RecipientName);
+            if (recipientId == Guid.Empty)
+            {
+                ModelState.AddModelError("", "Recipient does not exist");
+                return StatusCode(422, ModelState);
+            }
+            transactionMap.RecipientID = recipientId;
+
+            if (transactionDetails.PaymentMode == PaymentModeEnum.Credit_Card)
+            {
+                var existingCards = _creditCardRepository.GetCardIdsOfUser(userId);
+                bool check = false;
+                Guid creditCardId = Guid.Empty;
+                foreach (var cardId in existingCards)
+                {
+                    var existingCardName = _creditCardRepository.GetCardName(cardId);
+                    if (existingCardName == cardName)
+                    {
+                        check = true;
+                        creditCardId = cardId;
+                        break;
+                    }
+                }
+
+                if (!check)
+                {
+                    ModelState.AddModelError("", "Card does not exist");
+                    return StatusCode(422, ModelState);
+                }
+
+                transactionMap.CreditCardID = creditCardId;
+
+            }
+            else if(transactionDetails.PaymentMode == PaymentModeEnum.Bank)
+            {
+                throw new NotImplementedException();
+                //Guid bankId = Guid.Empty;
+            }
+
+            else
+            {
+                ModelState.AddModelError("", "Invalid Payment Mode");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!_transactiontRepository.CreateTransaction(transactionMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving.");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully Created");
+
+            
+            
+
+
+
+
+
+
+
         }
 
 

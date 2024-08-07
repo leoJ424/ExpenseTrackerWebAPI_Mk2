@@ -38,5 +38,10 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+        public Guid GetCategoryId(string categoryName)
+        {
+            return _context.Categories.Where(c => c.CategoryName == categoryName && c.Status == true).Select(c => c.CategoryID).FirstOrDefault();
+        }
     }
 }

@@ -112,12 +112,25 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
                                             CategoryName = t.CategoryName,
                                             RecipientName = r.RecipientName,
                                             Amount = t.t.Amount,
+                                            PaymentMode = t.t.PaymentMode,
                                             TransactionMode = t.t.TransactionMode,
                                             RewardPoints = t.t.RewardPoints ?? 0,
-                                            DateOfTransaction = t.t.Date,
+                                            Date = t.t.Date,
                                             GeneralComments = t.t.GeneralComments,
-                                        }).OrderBy(tdd => tdd.DateOfTransaction).ToList();
+                                        }).OrderBy(tdd => tdd.Date).ToList();
                                             
+        }
+
+        public bool CreateTransaction(Transaction transaction)
+        {
+            _context.Add(transaction);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

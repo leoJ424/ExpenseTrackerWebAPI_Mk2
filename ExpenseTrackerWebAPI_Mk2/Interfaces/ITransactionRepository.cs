@@ -1,4 +1,5 @@
 ﻿using ExpenseTrackerWebAPI_Mk2.Dto;
+using ExpenseTrackerWebAPI_Mk2.Models;
 
 namespace ExpenseTrackerWebAPI_Mk2.Interfaces
 {
@@ -12,5 +13,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
         DateTime GetLatestTransactionDateOnCard(Guid CreditCardId);
         ICollection<TransactionCategory_AmountPairs> GetCardTransactionAmountsGroupByCategory(DateTime date1, DateTime date2, Guid CreditCardId);
         ICollection<TransactionDetailsDto> GetTransactionDetailsForView(DateTime date1, DateTime date2, Guid CardId);
+        bool CreateTransaction(Transaction transaction);
+        bool Save();
     }
 }

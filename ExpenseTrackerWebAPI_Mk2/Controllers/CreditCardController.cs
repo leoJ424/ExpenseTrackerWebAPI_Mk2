@@ -100,6 +100,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             }
             
             Guid userId = _userRepository.GetUserId(userName);
+            if(userId == Guid.Empty)
+            {
+                ModelState.AddModelError("", "User does not exist");
+                return StatusCode(422, ModelState);
+            }
 
             var existingCards = _creditCardRepository.GetCardIdsOfUser(userId);
             var newCardNumber = creditCardCreate.First4Digits + " " + creditCardCreate.Second4Digits + " " + creditCardCreate.Third4Digits + " " + creditCardCreate.Last4Digits;
