@@ -12,11 +12,13 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
     public class CreditCardController : Controller
     {
         private readonly ICreditCardRepository _creditCardRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public CreditCardController(ICreditCardRepository creditCardRepository, IMapper mapper)
+        public CreditCardController(ICreditCardRepository creditCardRepository, IUserRepository userRepository, IMapper mapper)
         {
             _creditCardRepository = creditCardRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -87,5 +89,49 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateCreditCard([FromQuery] string userName,  [FromBody] CreditCardDto creditCardCreate)
+        {
+            if(creditCardCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            Guid userId = _userRepository.GetUserId(userName);
+
+            var existingCards = _creditCardRepository.GetCardIdsOfUser(userId);
+            var newCardNumber = creditCardCreate.First4Digits + " " + creditCardCreate.Second4Digits + " " + creditCardCreate.Third4Digits + " " + creditCardCreate.Last4Digits;
+            
+            foreach (var cardId in existingCards)
+            {
+                var cardNumber = _creditCardRepository.GetCardNumber(cardId);
+                if(cardNumber == newCardNumber)
+                {
+                    ModelState.AddModelError("", "Card already exists");
+                    return StatusCode(422, ModelState);
+                }
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var creditCardMap = _mapper.Map<CreditCard>(creditCardCreate);
+            creditCardMap.UserID = userId;
+            creditCardMap.Status = true;
+
+            if(!_creditCardRepository.CreateCreditCard(creditCardMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving.");
+                return StatusCode(500, ModelState);
+
+            }
+
+            return Ok("Successfully Created");
+        }
     }
 }

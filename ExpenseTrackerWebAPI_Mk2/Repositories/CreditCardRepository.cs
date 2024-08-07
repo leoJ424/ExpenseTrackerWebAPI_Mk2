@@ -23,6 +23,20 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
             return _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).FirstOrDefault();
         }
 
+        public string GetCardNumber(Guid creditCardId)
+        {
+            var cardNumber = "";
+
+            var f = _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.First4Digits).FirstOrDefault();
+            var s = _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.Second4Digits).FirstOrDefault();
+            var t = _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.Third4Digits).FirstOrDefault();
+            var l = _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.Last4Digits).FirstOrDefault();
+
+            cardNumber += f + " " + s + " " + t + " " + l;
+
+            return cardNumber;
+        }
+
         public CreditCard GetMaskedCardDetails(Guid creditCardId)
         {
             var card = _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).FirstOrDefault();
@@ -45,6 +59,18 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         public bool CreditCardExists(Guid creditCardId)
         {
             return _context.CreditCards.Any(cc => cc.CreditCardID == creditCardId && cc.Status == true);
+        }
+
+        public bool CreateCreditCard(CreditCard card)
+        {
+            _context.Add(card);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

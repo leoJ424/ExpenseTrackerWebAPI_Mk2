@@ -16,7 +16,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Dto
         public DateTime ExpDate { get; set; }
         public int CVC { get; set; }
         public double CreditLimit { get; set; }
-        public int StatementGenDate { get; set; }
+        public int StatementGenDay { get; set; }
         public int PaymentDueIn { get; set; }
         
     }
