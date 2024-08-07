@@ -12,7 +12,6 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
 
         //Create
         bool CreateRecipient(Recipient recipient);
-
         bool Save();
 
     }
