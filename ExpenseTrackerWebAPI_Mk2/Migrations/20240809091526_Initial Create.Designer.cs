@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTrackerWebAPI_Mk2.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240802092523_InitialCreate")]
+    [Migration("20240809091526_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -388,6 +388,12 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                         },
                         new
                         {
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RecipientName = "Amazon",
+                            Status = false
+                        },
+                        new
+                        {
                             RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
                             RecipientName = "Burlington",
                             Status = false
@@ -497,8 +503,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                     b.Property<Guid>("RecipientID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("RewardPoints")
-                        .HasColumnType("int");
+                    b.Property<double?>("RewardPoints")
+                        .HasColumnType("float");
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
@@ -528,574 +534,150 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                     b.HasData(
                         new
                         {
-                            TransactionID = new Guid("1a9b89a2-da14-4eca-bf84-8bfa6dad823a"),
-                            Amount = 100.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased groceries for the week at Costco.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3f3d54d9-2a94-48d4-a97c-fa8c31c57f02"),
-                            Amount = 100.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased winter accessories from Burlington.",
+                            TransactionID = new Guid("dd04c84a-5807-43b2-88bb-17e19e96bfaf"),
+                            Amount = 153.83000000000001,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2023, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought winter wear - jackets, socks, shoes",
                             PaymentMode = 1,
                             RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("9a1e55bb-080d-414d-bd88-f70c8c87fa6b"),
-                            Amount = 220.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a round-trip ticket with Southwest.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("4575e719-3887-413b-9b30-326cf11d27f7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2b4c0db2-156b-4d56-85bc-2344b481d263"),
-                            Amount = 75.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Stocked up on essentials from Kroger.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("a53c4426-df1c-4325-8e52-4ea027a6e83e"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3d56bf6a-7d6f-4eae-8b92-788ad83eca3e"),
-                            Amount = 25.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a quick lunch at Burger King.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("04848095-f6d3-489e-bfd2-92b09e039019"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("8a49e1ed-5243-4b8b-bf3b-ca622953c63d"),
-                            Amount = 200.0,
+                            TransactionID = new Guid("f2da2972-b060-43c8-8039-6f36404ee06c"),
+                            Amount = 800.0,
                             CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a new tablet for reading and entertainment.",
+                            Date = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new smartphone for upgraded features",
                             PaymentMode = 1,
-                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("5e8e09a6-f6d0-44a3-9621-8f59f4c30534"),
-                            Amount = 35.0,
+                            TransactionID = new Guid("4254185d-498b-45f4-b26c-fcdc16e648f6"),
+                            Amount = 799.99000000000001,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new smartphone for upgraded features",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("a821ce9f-e206-4c3e-be7e-5d502c777972"),
+                            Amount = 60.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new jacket for the upcoming spring season",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("dc769f30-ba3c-4df8-8e9e-44d0f905dea6"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("5c75c12b-3b90-4222-887c-001b9ae75163"),
+                            Amount = 25.75,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a family dinner at Chick-fil-A.",
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Dined at Chick-fil-A for lunch",
                             PaymentMode = 1,
                             RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("7e1d5e54-fb92-4b3f-a356-1ebfe67fc1e7"),
-                            Amount = 30.0,
+                            TransactionID = new Guid("49d48d35-39b6-409a-b2e1-2ae30c4db609"),
+                            Amount = 100.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new pair of sneakers for daily wear",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("b55146f1-c05b-4a13-9e6f-1eb5d79b30ea"),
+                            Amount = 8.4499999999999993,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a quick meal at Panda Express.",
+                            Date = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought breakfast at Dunkin' Donuts",
                             PaymentMode = 1,
-                            RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
+                            RecipientID = new Guid("dea8e720-e79c-4fc3-81fd-201befa9f904"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("8afa5455-fdf1-4e93-8e77-be663b175a6e"),
+                            TransactionID = new Guid("e4701e3d-ce36-4662-b196-b93d7de08973"),
                             Amount = 80.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased winter clothing at H&M.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("5e1a58c8-40bc-47e6-baa4-3b5b6a20509e"),
-                            Amount = 300.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a new smartphone from BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("1d07b74a-732e-4721-adce-f4c7c4a5a125"),
-                            Amount = 350.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a round-trip flight with United Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2c7d40db-86a5-4698-8cc3-ffc79a64e572"),
-                            Amount = 400.0,
                             CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a gaming console from BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2d62b49a-92a3-43bc-9628-ebf167d31c8f"),
-                            Amount = 55.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a new sweater from Gap.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("b7caea13-1d1a-4780-831a-ed973765c67a"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4f3a197b-bf8b-4745-94cc-6c1b0d1c8baf"),
-                            Amount = 50.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed snacks during a Delta flight.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("62b2c92b-9c07-4878-bb03-8e6010d653e8"),
-                            Amount = 120.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought bulk groceries from Costco.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6f4f7b9c-5d96-466d-83a5-b9d77b35c4e1"),
-                            Amount = 50.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Stocked up on snacks and drinks at Kroger.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("a53c4426-df1c-4325-8e52-4ea027a6e83e"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("1c02bc7e-f204-4e8f-bae2-f8d24bc8d401"),
-                            Amount = 500.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a flight ticket with American Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4f493f8c-5a80-493a-8f24-ec1d0897c3a3"),
-                            Amount = 70.0,
-                            CategoryID = new Guid("f5186c55-332a-4eae-b917-7f5fae0b2a7b"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed in-flight entertainment on American Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2a15a4ed-134a-4268-9133-b28ff8c46a04"),
-                            Amount = 75.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought holiday gifts at Target.",
+                            Date = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a portable speaker for outdoor gatherings",
                             PaymentMode = 1,
                             RecipientID = new Guid("18884556-def7-499c-89df-09a8d95b62d0"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("7b7f48f6-9a35-411c-b3eb-ee79d96c4f66"),
-                            Amount = 20.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Grabbed breakfast from Dunkin' Donuts.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("dea8e720-e79c-4fc3-81fd-201befa9f904"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("5c8c8ff9-d91c-4d99-a126-36a098bec1b4"),
-                            Amount = 30.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Had dinner at Chick-fil-A with family.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3a4b28d4-2b71-42b9-a89e-13da1d10d9d6"),
-                            Amount = 25.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Had a late-night snack at Burger King.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("04848095-f6d3-489e-bfd2-92b09e039019"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("1e7dba55-d7a2-485e-b87b-64b98c7fa2c5"),
-                            Amount = 200.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a tablet as a holiday gift.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6e7a7335-7e63-4e06-bc4b-36f8586bb4c4"),
-                            Amount = 500.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a last-minute ticket for Delta Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4d7e41f9-505c-431e-af61-32c84e07df6b"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("f5186c55-332a-4eae-b917-7f5fae0b2a7b"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2023, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased tickets for a trip with Delta.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6f100d66-fc30-4fa2-be71-cb62f16120b4"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("f5186c55-332a-4eae-b917-7f5fae0b2a7b"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Attended a fashion show featuring Ralph Lauren.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("3cfff9f1-d8b3-4396-a44f-622899681719"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4a0e6c4d-6edb-43a6-877c-b9c96d1cda92"),
-                            Amount = 300.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a new laptop from BestBuy for work.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3f35a59a-f20d-465c-8f6f-32bb0fffb56d"),
-                            Amount = 350.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2023, 12, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a flight with American Airlines for vacation.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2e8f06a1-6a58-429e-9b75-0f0191a57d91"),
+                            TransactionID = new Guid("285249e4-db59-4e36-bc15-e3496feed924"),
                             Amount = 600.0,
                             CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a round-trip flight for a business trip.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("7a67d568-c099-4e61-b067-8d16c891fa68"),
-                            Amount = 65.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased winter clothing from Burlington.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4c3c5d6c-2736-44d4-9d77-180a7bb7e10c"),
-                            Amount = 28.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Had a meal at Panda Express after shopping.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3d6784c2-612a-4420-8d38-354f1d4b199c"),
-                            Amount = 25.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a coffee and pastry at Dunkin' Donuts.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("dea8e720-e79c-4fc3-81fd-201befa9f904"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4f97f8c3-f33e-4d35-912d-ca4c73f39f56"),
-                            Amount = 12.0,
-                            CategoryID = new Guid("f5186c55-332a-4eae-b917-7f5fae0b2a7b"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Watched a movie on the flight with American Airlines.",
+                            Date = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Booked flights to Miami, USA for spring break",
                             PaymentMode = 1,
                             RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("5a1d5b77-eb9a-447d-a2b9-4f7d4e82f063"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("f5186c55-332a-4eae-b917-7f5fae0b2a7b"),
+                            TransactionID = new Guid("3ffd8e08-d9a8-4676-abde-24639e728185"),
+                            Amount = 50.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Attended a fashion event featuring Ralph Lauren.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("3cfff9f1-d8b3-4396-a44f-622899681719"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("63ba5b48-fb89-4dbd-b40d-b55b14eb5dd7"),
-                            Amount = 499.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a new smartphone at BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("1f12b98e-9c29-4c41-8586-ad340a3565f9"),
-                            Amount = 70.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased some new jeans at Gap.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("b7caea13-1d1a-4780-831a-ed973765c67a"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6e2f5b73-4d75-43a4-8a80-07c20544d154"),
-                            Amount = 250.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a flight with Delta Airlines for vacation.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6d23e27c-477d-4c77-b69f-8d8ed593d5c9"),
-                            Amount = 250.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a smart home device from BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("5a8b6b9b-d8e0-49c1-ac58-bde963635df4"),
-                            Amount = 110.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Did monthly shopping at Costco.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("4eaa2b7c-4b58-41c3-9e4b-3a9dbe73f19a"),
-                            Amount = 45.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a new jacket from H&M.",
+                            Date = new DateTime(2024, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new dress for a spring outing",
                             PaymentMode = 1,
                             RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("3d7bae39-2344-4a77-bd3f-c99c320d9e3c"),
-                            Amount = 700.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a flight ticket for a vacation.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1103,321 +685,794 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                         new
                         {
                             TransactionID = new Guid("9d9f14d1-250e-40ed-8d42-02bb85fa72f6"),
-                            Amount = 35.0,
+                            Amount = 50.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Returned the new dress for a spring outing",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 0,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("c093e452-cdcc-4b7b-a498-1095b07df761"),
+                            Amount = 14.25,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a family dinner at Chick-fil-A.",
+                            Date = new DateTime(2024, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Grabbed lunch at McDonald's",
                             PaymentMode = 1,
-                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RecipientID = new Guid("5d47a329-4a2d-4676-b349-3d26958ff25d"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("81a012a5-f90a-4c3b-88da-1b743a59cc4e"),
-                            Amount = 40.0,
+                            TransactionID = new Guid("e900ca8a-b60b-4c2e-8570-3bb42c6116dc"),
+                            Amount = 17.5,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Had a family lunch at Chick-fil-A.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("c92a1d1d-22fc-408c-bda6-98bc62330e08"),
-                            Amount = 250.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a new TV from Walmart.",
+                            Date = new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Enjoyed a meal at Panda Express for dinner",
                             PaymentMode = 1,
-                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("4a8c0043-0fae-42ac-b4a3-fa6b3c5d60e5"),
-                            Amount = 110.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
+                            TransactionID = new Guid("60299a7b-25f1-4895-bbcf-0ebd697d0780"),
+                            Amount = 60.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Stocked up on groceries at Costco.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("38e4e39a-4b82-44ed-b90b-563f5c2e6f45"),
-                            Amount = 700.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a last-minute flight ticket for travel.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("2eed2e7e-8858-491f-aff4-67c1a3130d02"),
-                            Amount = 80.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased kitchen appliances from Walmart.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6b4d03f4-3e5a-4324-8f9e-1a5b92980f53"),
-                            Amount = 900.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a flight to Paris with Air France.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("df7269a9-6c65-434f-bcd5-d9853b0b75b3"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("9d05b8e3-5b65-4703-85f1-bd9c32c60091"),
-                            Amount = 850.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Round-trip flight to London on United Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("1cbef37d-1b75-4bfd-97a9-9c8e468f0c78"),
-                            Amount = 80.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased souvenirs at Gap before the trip.",
+                            Date = new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new dress for the upcoming summer season",
                             PaymentMode = 1,
                             RecipientID = new Guid("b7caea13-1d1a-4780-831a-ed973765c67a"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("4f8a19f6-b4d1-4a0f-bda3-8f073b6538bc"),
-                            Amount = 700.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a flight to Barcelona with Delta Airlines.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("8fc6d79e-c2a6-4f56-a05d-0fca4b0bfbc5"),
+                            TransactionID = new Guid("1a0c6c5c-fcfd-499a-8346-c0b8cd1489c0"),
                             Amount = 300.0,
                             CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought a travel adapter at BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("7d8b8c6a-3f40-4908-b25b-db4a97e8f17e"),
-                            Amount = 950.0,
-                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 2, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Booked a last-minute flight to Tokyo.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("73f04239-ca28-47e1-9243-a8c888c06f4c"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("e43b3f93-1b7a-48a9-829e-be9a7b99b75d"),
-                            Amount = 30.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Had a quick meal at Chick-fil-A before the flight.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("84b7d10a-1f4d-4a19-afe9-f56b64f58d6e"),
-                            Amount = 90.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased travel essentials at Burlington.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("5f6182da-b9a5-4181-bf83-0dce3c009d9a"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Stocked up on groceries at Costco for the trip.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("d4c4089c-bf54-4825-96a5-7b444b849f2d"),
-                            Amount = 200.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a camera at Walmart for travel photos.",
+                            Date = new DateTime(2024, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new smartwatch for fitness tracking and notifications",
                             PaymentMode = 1,
                             RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("3d5c2a86-348a-43b4-bf3d-f1e5b4b2a75f"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Stocked up on groceries at Costco.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("5a9e1d88-ff26-4f55-a4e3-5c86f5291b79"),
-                            Amount = 35.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            TransactionID = new Guid("adf83f65-1f1b-4915-b034-cca4ed5e0ef6"),
+                            Amount = 400.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Enjoyed a family meal at Chick-fil-A.",
+                            Date = new DateTime(2024, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new suit for upcoming business meetings",
                             PaymentMode = 1,
-                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RecipientID = new Guid("3cfff9f1-d8b3-4396-a44f-622899681719"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
                         },
                         new
                         {
-                            TransactionID = new Guid("c73c7f0e-cbf3-4c82-bdb9-8e3a8f9dffce"),
-                            Amount = 200.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought household items at Target.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("18884556-def7-499c-89df-09a8d95b62d0"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("29d6b144-c31c-4b0d-82db-ba042a60b8d0"),
-                            Amount = 300.0,
-                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a new TV at BestBuy.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("6e9b83e6-3fb4-494c-bf61-b08d80f6db93"),
-                            Amount = 12.0,
-                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
-                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Grabbed coffee and donuts from Dunkin'.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("dea8e720-e79c-4fc3-81fd-201befa9f904"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("0d5c78c6-f5e7-494f-83fb-6da06d1a50d2"),
-                            Amount = 150.0,
-                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
-                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Bought clothes at Burlington.",
-                            PaymentMode = 1,
-                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
-                            Status = false,
-                            TransactionMode = 1,
-                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
-                        },
-                        new
-                        {
-                            TransactionID = new Guid("7f8d6c5f-c0f8-4e8b-ac8c-75a5b67b5745"),
-                            Amount = 250.0,
+                            TransactionID = new Guid("d41a1d2d-76e2-4577-aef0-a115183212a7"),
+                            Amount = 1200.0,
                             CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
-                            CreditCardID = new Guid("75987053-7057-499b-bdf6-14ac41509853"),
-                            Date = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GeneralComments = "Purchased a flight ticket to New York with Delta.",
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Reserved flights to London, UK for a business conference",
                             PaymentMode = 1,
                             RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("a2850307-d063-4227-b50f-b8996118ad21"),
+                            Amount = 70.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought new jeans for casual wear",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("b7caea13-1d1a-4780-831a-ed973765c67a"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("5f89f1e1-c265-42dc-b61b-f3947c179837"),
+                            Amount = 21.5,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Dined at Chick-fil-A for dinner",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("2088043a-475b-4a61-ab6d-4e00d7e566b3"),
+                            Amount = 1200.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new laptop for work and entertainment",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("29f8a6d4-2ed1-4490-9e89-523bc3f67ec7"),
+                            Amount = 1199.5,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new laptop for work and entertainment",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("d75ff396-45e7-4462-b0f1-d076444aad47"),
+                            Amount = 103.83,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Pair of jeans and a couple of t-shirts",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("02f1bdff-80a5-41d1-be93-e14d97402742"),
+                            Amount = 700.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new digital camera for photography hobby",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("f66a54e3-24d9-4842-9883-458afabc9f2a"),
+                            Amount = 19.75,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Enjoyed lunch at Panda Express",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("2f5dea5a-d1f8-4a05-8663-7c9376c0e216"),
+                            Amount = 19.75,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Enjoyed lunch at Panda Express",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("208da7f5-9bbf-4566-a3e2-253e6596cf63"),
+                            Amount = 2500.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Booked tickets to Tokyo, Japan for vacation",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("481f0eae-1fc0-432b-b52e-cc93d69a62a6"),
+                            Amount = 40.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new hoodie for chilly evenings",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("dc769f30-ba3c-4df8-8e9e-44d0f905dea6"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("c8c934c9-1bf2-4285-bddc-6e8652dc8e72"),
+                            Amount = 500.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new gaming console for leisure time",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("1d2bdc9d-f1cb-4e36-a285-1b32ed3ad6fd"),
+                            Amount = 80.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought new shoes for everyday wear",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("b7caea13-1d1a-4780-831a-ed973765c67a"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("df89eef9-4dc9-4e5b-a6ae-cb811a2d68fe"),
+                            Amount = 12.35,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Grabbed lunch at Burger King",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("04848095-f6d3-489e-bfd2-92b09e039019"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("892df5a2-b46a-4a63-be9c-e3db033eb86f"),
+                            Amount = 9.9499999999999993,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought lunch at Burger King",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("04848095-f6d3-489e-bfd2-92b09e039019"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("e8ceef1e-6412-43a4-ba41-17f5c57ba8fb"),
+                            Amount = 30.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought new shorts for the upcoming summer season",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("b3c96fac-0a88-47fa-bebc-996a4cd3a39e"),
+                            Amount = 120.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new winter coat for the next winter season",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("bab80281-36d2-4b1a-844d-0b4f555cd0bd"),
+                            Amount = 15.17,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a Jacket",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("5abdc099-4bab-4351-9a0a-4448e3391339"),
+                            Amount = 40.0,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a new swimsuit for the upcoming summer season",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("b7dcae9d-3f55-4ba9-ab33-855fcd44ad77"),
+                            Amount = 33.460000000000001,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a pair of shoes",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("6e2f5b73-4d75-43a4-8a80-07c20544d154"),
+                            Amount = 33.460000000000001,
+                            CategoryID = new Guid("4d627443-1ae0-49e0-8bf9-b1ea4b8cd8e1"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Returned the shoes",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7bb90da3-fee4-4a5b-8679-5d820e90ac3d"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 0,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("9fc18d82-1e91-44ed-b17d-5a90794b56d7"),
+                            Amount = 522.33000000000004,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a PS5",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("bb4b5ae6-0992-42cd-99ee-0e4b6d354bca"),
+                            Amount = 522.33000000000004,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a new laptop",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("0321dcf8-9ddc-4b11-a880-9edbc71e977a"),
+                            Amount = 522.33000000000004,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a PS5",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("cf6b8a50-cb07-4224-ab97-a81fc20a29ff"),
+                            Amount = 150.75,
+                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Weekly grocery shopping at H-E-B",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("dfb07eb1-81e9-4139-8419-ba545f0db07a"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("944f7c7f-5706-4673-acba-598111f44441"),
+                            Amount = 120.5,
+                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased groceries and household items",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("18884556-def7-499c-89df-09a8d95b62d0"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("44a1cebe-267f-4699-8c49-91bdc8b8ddf0"),
+                            Amount = 45.600000000000001,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Dinner at Chick-fil-A",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("a7186dbd-fc28-44dc-91bf-dd30edb24535"),
+                            Amount = 85.75,
+                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought household items",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("f8ca31ee-bea6-4f45-a0a8-4c1f80329336"),
+                            Amount = 22.5,
+                            CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Lunch with friends",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("41f99a2a-3fed-4bec-bee2-465f46f933a5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("d483fb6b-134d-400c-b03e-1c5f304b0aa0"),
+                            Amount = 200.0,
+                            CategoryID = new Guid("b72e8dc1-1bc0-4b1e-b086-e412ed4a9dc0"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Prescription refill at CVS",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("3ebaa280-3ec4-4b68-aa21-f9b2fe2cbd63"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("8a564d1a-8a57-447c-a2ac-10f5316fdabf"),
+                            Amount = 1200.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Flight tickets with Air France",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("df7269a9-6c65-434f-bcd5-d9853b0b75b3"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("630f921a-49ae-4e03-b5fa-211649b1fe84"),
+                            Amount = 350.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Flight ticket",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("67b7ce82-5aea-493c-81e8-00a7f14f228b"),
+                            Amount = 350.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Flight ticket - Refund",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 0,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("866d56f8-f87a-4c5f-ad2a-7acb32fba09a"),
+                            Amount = 320.5,
+                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought electronics from Amazon",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("d0c989e3-07e0-423b-a547-af6b82ffed0e"),
+                            Amount = 1200.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought new laptop",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("892d507a-dc0c-4efa-9ae2-353244834fe8"),
+                            Amount = 65.25,
+                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Weekly groceries",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("a53c4426-df1c-4325-8e52-4ea027a6e83e"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("9e74a91f-450e-4280-a876-86aaa1e3c7b1"),
+                            Amount = 75.200000000000003,
+                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought new clothes",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("6ca5710b-fce0-4958-93cd-63beb582576e"),
+                            Amount = 150.75,
+                            CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bulk shopping for the month",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("c7ee15e0-5480-4544-b2d6-094ba5134ac7"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("4f657cbb-04f2-4c6c-8288-e05c6bf637e2"),
+                            Amount = 95.0,
+                            CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought household essentials",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("18884556-def7-499c-89df-09a8d95b62d0"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("5552d052-f5f6-4544-b083-a2f71d594f46"),
+                            Amount = 35.5,
+                            CategoryID = new Guid("b72e8dc1-1bc0-4b1e-b086-e412ed4a9dc0"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Prescription",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("3ebaa280-3ec4-4b68-aa21-f9b2fe2cbd63"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("666b5bea-cad5-4796-91ed-da3cba658148"),
+                            Amount = 1200.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Booked flight tickets to Paris, France for summer vacation",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("f42dc138-78c5-487d-afee-90b6a0b22651"),
+                            Amount = 2500.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Reserved flights to Tokyo, Japan for a cultural exploration trip",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("03a5b5de-e9ec-4e70-94f2-00da5d667787"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("77c968f7-4077-4b39-b146-1819953df416"),
+                            Amount = 400.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Booked tickets to Los Angeles, USA for a weekend getaway",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("4575e719-3887-413b-9b30-326cf11d27f7"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("0ea1410b-e394-4f42-a622-ec8fe7b33c46"),
+                            Amount = 1200.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a powerful laptop for work and gaming",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1b5a7d64-2e25-48cd-8cd6-9587f6078ca5"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("ac828fe5-632d-4d52-8917-c817338253e6"),
+                            Amount = 800.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Upgraded to the latest smartphone model",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("cc218736-5271-43a3-9384-e21d3cd989d7"),
+                            Amount = 500.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
+                            Date = new DateTime(2024, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought the latest gaming console with accessories",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RewardPoints = 24.449999999999999,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("19e89b80-8561-49e0-b874-f49a305770da"),
+                            Amount = 1500.0,
+                            CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
+                            CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
+                            Date = new DateTime(2024, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Bought a large smart TV for the living room",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7ca7fcb7-5650-41ba-bcfa-41a1e428ed6e"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1428,10 +1483,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                             Amount = 70.0,
                             CategoryID = new Guid("8815ac70-1c20-4167-a045-964d819e195f"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneralComments = "Picked up groceries at Kroger.",
                             PaymentMode = 1,
                             RecipientID = new Guid("a53c4426-df1c-4325-8e52-4ea027a6e83e"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1442,10 +1498,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                             Amount = 180.0,
                             CategoryID = new Guid("a5c6d659-aaf2-495f-affc-015627059750"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneralComments = "Bought a new tablet at Walmart.",
                             PaymentMode = 1,
                             RecipientID = new Guid("1059d5f9-e4aa-4c06-8f35-e664b6215378"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1456,10 +1513,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                             Amount = 30.0,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneralComments = "Had dinner at Panda Express.",
                             PaymentMode = 1,
                             RecipientID = new Guid("6ecf6c47-660e-4871-a6fc-9c17167a3b5d"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1470,10 +1528,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                             Amount = 60.0,
                             CategoryID = new Guid("43a9d80e-581d-4639-9bcd-e062e7ac7176"),
                             CreditCardID = new Guid("cd4e4392-2fe6-4000-8f7b-d4c3885a0f7d"),
-                            Date = new DateTime(2024, 3, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneralComments = "Bought some spring clothes at H&M.",
                             PaymentMode = 1,
                             RecipientID = new Guid("fec14558-524a-46a1-ab0e-f8acfaf9ab49"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
@@ -1484,10 +1543,26 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                             Amount = 25.0,
                             CategoryID = new Guid("9ad4ccf1-f72b-4fe2-9c76-e91cd01445d8"),
                             CreditCardID = new Guid("566863e0-cac1-427b-9f22-74519d3970d9"),
-                            Date = new DateTime(2024, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GeneralComments = "Enjoyed lunch at Burger King with friends.",
                             PaymentMode = 1,
                             RecipientID = new Guid("04848095-f6d3-489e-bfd2-92b09e039019"),
+                            RewardPoints = 0.0,
+                            Status = false,
+                            TransactionMode = 1,
+                            UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
+                        },
+                        new
+                        {
+                            TransactionID = new Guid("7f8d6c5f-c0f8-4e8b-ac8c-75a5b67b5745"),
+                            Amount = 250.0,
+                            CategoryID = new Guid("a6d314d6-ab99-47f9-9b17-2c94f9f03086"),
+                            CreditCardID = new Guid("75987053-7057-499b-bdf6-14ac41509853"),
+                            Date = new DateTime(2024, 7, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GeneralComments = "Purchased a flight ticket to New York with Delta.",
+                            PaymentMode = 1,
+                            RecipientID = new Guid("7431dc59-2e5a-4863-a58b-05e17566e310"),
+                            RewardPoints = 0.0,
                             Status = false,
                             TransactionMode = 1,
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73")
