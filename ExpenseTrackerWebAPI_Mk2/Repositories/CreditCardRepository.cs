@@ -51,6 +51,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
             return card;
         }
 
+        public Guid GetCardOwner(Guid creditCardId)
+        {
+            return _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.UserID).FirstOrDefault();
+        }
+
         public string GetCardName(Guid creditCardId)
         {
             return _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.CardName).FirstOrDefault();

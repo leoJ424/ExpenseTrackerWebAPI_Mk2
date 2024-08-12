@@ -59,6 +59,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
                 var authClaims = new List<Claim>
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.UserName ),
+                    new Claim("userID", user.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ),
 
                 };

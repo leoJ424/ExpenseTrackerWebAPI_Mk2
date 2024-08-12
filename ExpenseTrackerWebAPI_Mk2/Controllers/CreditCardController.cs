@@ -3,10 +3,13 @@ using ExpenseTrackerWebAPI_Mk2.Data;
 using ExpenseTrackerWebAPI_Mk2.Dto;
 using ExpenseTrackerWebAPI_Mk2.Interfaces;
 using ExpenseTrackerWebAPI_Mk2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ExpenseTrackerWebAPI_Mk2.Controllers
 {
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     [ApiController]
     public class CreditCardController : Controller
@@ -27,6 +30,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetCardIdsOfUser(Guid id)
         {
+
             var result = _creditCardRepository.GetCardIdsOfUser(id);
 
             if (!ModelState.IsValid)
@@ -37,11 +41,36 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(result);
         }
 
+        
         [HttpGet("cardDetails/{type}")]
         [ProducesResponseType(200, Type = typeof(CreditCard))]
         [ProducesResponseType(400)]
         public IActionResult GetCardDetails(Guid cardId, int type)
         {
+            #region Check if card belongs to user
+
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if(authHeader == null || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Authorization Header missing or irrelevent");
+            }
+
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            if (claimUserId == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+
+            if(claimUserId != _creditCardRepository.GetCardOwner(cardId).ToString())
+            {
+                return Unauthorized("Card does not belong to user");
+            }
+
+            #endregion
+
             CreditCardDto result = new CreditCardDto();
             if(!_creditCardRepository.CreditCardExists(cardId))
             {
@@ -74,6 +103,30 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetCardName(Guid cardId)
         {
+            #region Check if card belongs to user
+
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if (authHeader == null || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Authorization Header missing or irrelevent");
+            }
+
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            if (claimUserId == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+
+            if (claimUserId != _creditCardRepository.GetCardOwner(cardId).ToString())
+            {
+                return Unauthorized("Card does not belong to user");
+            }
+
+            #endregion
+
             if (!_creditCardRepository.CreditCardExists(cardId))
             {
                 return NotFound();
