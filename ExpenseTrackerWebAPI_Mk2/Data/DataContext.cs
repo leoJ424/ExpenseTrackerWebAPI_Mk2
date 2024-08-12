@@ -1,9 +1,11 @@
 ﻿using ExpenseTrackerWebAPI_Mk2.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTrackerWebAPI_Mk2.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<IdentityUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -19,6 +21,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             #region Bank Table
 
             modelBuilder.Entity<Bank>()
@@ -245,7 +249,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Data
 
             modelBuilder.Entity<User>()
                 .HasData(
-                    new User { UserID = new Guid("8DAA3821-3685-4299-A172-4BBF18929A73"), UserName = "admin", Password = "admin", FirstName = "Admin", LastName = "Nimda", Email = "admin@admin.com" },
+                    new User { UserID = new Guid("8DAA3821-3685-4299-A172-4BBF18929A73"), UserName = "user1", Password = "user1", FirstName = "User", LastName = "Resu", Email = "user@user.com" },
                     new User { UserID = new Guid("BD500CE6-DEE1-4445-A214-410829DB561B"), UserName = "John", Password = "john", FirstName = "John", LastName = "Reese", Email = "john.reese@machine.com" }
                 );
 
