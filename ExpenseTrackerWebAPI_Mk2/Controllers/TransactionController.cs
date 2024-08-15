@@ -346,7 +346,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateTransaction([FromQuery] string userName, [FromQuery] string? cardName, [FromQuery] string? bankName, [FromBody] TransactionDetailsDto transactionDetails)
+        public IActionResult CreateTransaction([FromQuery] string? cardName, [FromQuery] string? bankName, [FromBody] TransactionDetailsDto transactionDetails)
         {          
             if (transactionDetails == null)
             {
@@ -361,8 +361,23 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             var transactionMap = _mapper.Map<Transaction>(transactionDetails);
             transactionMap.Status = true;
 
-            Guid userId = _userRepository.GetUserId(userName);
-            if (userId == Guid.Empty)
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if (authHeader == null || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Authorization Header missing or irrelevent");
+            }
+
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            if (claimUserId == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+
+            Guid userId = new Guid(claimUserId);
+            if (!_userRepository.UserIdExists(userId))
             {
                 ModelState.AddModelError("", "User does not exist");
                 return StatusCode(422, ModelState);

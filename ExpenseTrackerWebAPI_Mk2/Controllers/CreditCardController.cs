@@ -175,19 +175,38 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateCreditCard([FromQuery] string userName,  [FromBody] CreditCardDto creditCardCreate)
+        public IActionResult CreateCreditCard([FromBody] CreditCardDto creditCardCreate)
         {
             if(creditCardCreate == null)
             {
                 return BadRequest(ModelState);
             }
-            
-            Guid userId = _userRepository.GetUserId(userName);
-            if(userId == Guid.Empty)
+
+            #region Get User Id from request header
+
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if (authHeader == null || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Authorization Header missing or irrelevent");
+            }
+
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            if (claimUserId == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+
+            Guid userId = new Guid(claimUserId);
+            if(!_userRepository.UserIdExists(userId))
             {
                 ModelState.AddModelError("", "User does not exist");
                 return StatusCode(422, ModelState);
             }
+
+            #endregion
 
             var existingCards = _creditCardRepository.GetCardIdsOfUser(userId);
             var newCardNumber = creditCardCreate.First4Digits + " " + creditCardCreate.Second4Digits + " " + creditCardCreate.Third4Digits + " " + creditCardCreate.Last4Digits;

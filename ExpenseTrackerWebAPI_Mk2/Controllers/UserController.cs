@@ -35,12 +35,20 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            var claimUserName = jwtToken.Claims.FirstOrDefault(c => c.Type == "Sub")?.Value;
+
             if (claimUserId == null)
             {
                 return Unauthorized("User ID not found in token");
             }
 
+            if (claimUserName == null)
+            {
+                return Unauthorized("User Name not found in token");
+            }
+
             var result = _mapper.Map<UserDto>(_userRepository.GetUserById(new Guid(claimUserId)));
+            result.UserName = claimUserName;
 
             if (!ModelState.IsValid)
             {
@@ -50,40 +58,40 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(result);
         }
 
+        ///Commenting out as no longer do we need to create a user. It is taken care in accounts controller under register a user
+        //[HttpPost]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public IActionResult CreateUser([FromBody] UserDto userCreate)
+        //{
+        //    if (userCreate == null)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-        [HttpPost]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromBody] UserDto userCreate)
-        {
-            if (userCreate == null)
-            {
-                return BadRequest(ModelState);
-            }
+        //    var user = _userRepository.GetAllUsers()
+        //                              .Where(u => u.UserName.Trim().ToUpper() == userCreate.UserName.ToUpper()).FirstOrDefault();
 
-            var user = _userRepository.GetAllUsers()
-                                      .Where(u => u.UserName.Trim().ToUpper() == userCreate.UserName.ToUpper()).FirstOrDefault();
+        //    if (user != null)
+        //    {
+        //        ModelState.AddModelError("", "User already exists");
+        //        return StatusCode(422, ModelState);
+        //    }
 
-            if (user != null)
-            {
-                ModelState.AddModelError("", "User already exists");
-                return StatusCode(422, ModelState);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //    var userMap = _mapper.Map<User>(userCreate);
+        //    userMap.Status = true; //Set true by default. Otherwise false is set as default when object is created.
 
-            var userMap = _mapper.Map<User>(userCreate);
-            userMap.Status = true; //Set true by default. Otherwise false is set as default when object is created.
-
-            if (!_userRepository.CreateUser(userMap))
-            {
-                ModelState.AddModelError("", "Something went wrong while saving.");
-                return StatusCode(500, ModelState);
-            }
-            return Ok("Successfully Created");
-        }
+        //    if (!_userRepository.CreateUser(userMap))
+        //    {
+        //        ModelState.AddModelError("", "Something went wrong while saving.");
+        //        return StatusCode(500, ModelState);
+        //    }
+        //    return Ok("Successfully Created");
+        //}
     }
 }
