@@ -35,7 +35,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
-            var claimUserName = jwtToken.Claims.FirstOrDefault(c => c.Type == "Sub")?.Value;
+            var claimUserName = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
             if (claimUserId == null)
             {

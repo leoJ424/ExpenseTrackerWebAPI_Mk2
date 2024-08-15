@@ -15,6 +15,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         public ICollection<Guid> GetCardIdsOfUser(Guid userId)
         {
             return _context.CreditCards.Where(cc => cc.UserID == userId && cc.Status == true)
+                                       .OrderBy(cc => cc.CardName)
                                        .Select(cc => cc.CreditCardID).ToList();
         }
 

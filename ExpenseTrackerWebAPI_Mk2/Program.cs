@@ -99,7 +99,7 @@ using (var scope = app.Services.CreateScope())
     var user2 = await userManager.FindByNameAsync("UserMaster");
     if(user2 == null)
     {
-        var createUserMaster = new IdentityUser {Id = "8DAA3821-3685-4299-A172-4BBF18929A73", UserName = "UserMaster", Email = "usermaster@user.com" };
+        var createUserMaster = new IdentityUser {Id = new Guid("8DAA3821-3685-4299-A172-4BBF18929A73").ToString(), UserName = "UserMaster", Email = "usermaster@user.com" };
         var result = await userManager.CreateAsync(createUserMaster, "usermaster");
         if (result.Succeeded)
         {
