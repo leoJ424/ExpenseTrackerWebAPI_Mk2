@@ -23,6 +23,10 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
             return _context.Users.Where(u => u.UserName == userName && u.Status == true).Select(u => u.UserID).FirstOrDefault();
         }
 
+        public User GetUserById(Guid userId)
+        {
+            return _context.Users.Where(u => u.UserID == userId && u.Status == true).FirstOrDefault();
+        }
         public bool CreateUser(User user)
         {
             _context.Add(user);

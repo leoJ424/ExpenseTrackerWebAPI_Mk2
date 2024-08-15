@@ -6,6 +6,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
     {
         ICollection<User> GetAllUsers();
         Guid GetUserId(string userName);
+        User GetUserById(Guid userId);
         bool CreateUser(User user);
         bool Save();
     }

@@ -28,6 +28,36 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Guid>))]
         [ProducesResponseType(400)]
+        public IActionResult GetCardIdsOfCurrentUser()
+        {
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if (authHeader == null || !authHeader.StartsWith("Bearer "))
+            {
+                return Unauthorized("Authorization Header missing or irrelevent");
+            }
+
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            if (claimUserId == null)
+            {
+                return Unauthorized("User ID not found in token");
+            }
+
+            var result = _creditCardRepository.GetCardIdsOfUser(new Guid(claimUserId));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("specificUser")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Guid>))]
+        [ProducesResponseType(400)]
         public IActionResult GetCardIdsOfUser(Guid id)
         {
 
