@@ -71,6 +71,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    ////Setup default roles
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var roles = new[] { "Admin", "User"};
 
@@ -82,6 +83,7 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
+    //Setup default users/admins
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
     var user = await userManager.FindByNameAsync("Admin");
     if(user == null)
@@ -91,6 +93,17 @@ using (var scope = app.Services.CreateScope())
         if (result.Succeeded)
         {
             await userManager.AddToRoleAsync(createAdmin, "Admin");
+        }
+    }
+
+    var user2 = await userManager.FindByNameAsync("UserMaster");
+    if(user2 == null)
+    {
+        var createUserMaster = new IdentityUser {Id = "8DAA3821-3685-4299-A172-4BBF18929A73", UserName = "UserMaster", Email = "usermaster@user.com" };
+        var result = await userManager.CreateAsync(createUserMaster, "usermaster");
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(createUserMaster, "User");
         }
     }
 }

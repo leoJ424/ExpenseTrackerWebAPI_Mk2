@@ -1,4 +1,5 @@
-﻿using ExpenseTrackerWebAPI_Mk2.Models;
+﻿using ExpenseTrackerWebAPI_Mk2.Interfaces;
+using ExpenseTrackerWebAPI_Mk2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -16,12 +17,14 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserRepository _userRepository;
 
-        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IUserRepository userRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _userRepository = userRepository;
 
         }
 
@@ -39,6 +42,10 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
                     result = await _userManager.AddToRoleAsync(userCreated, "User");
                     if(result.Succeeded)
                     {
+                        //Adding details of new user created to the user table
+                        Models.User newUser = new User { UserID = new Guid(userCreated.Id), FirstName = model.FirstName, LastName = model.LastName, Status = true };
+                        _userRepository.CreateUser(newUser);
+
                         return Ok(new { message = "User Registered and assigned role" });
                     }
                 }
