@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExpenseTrackerWebAPI_Mk2.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -83,11 +83,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
-                    UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -358,11 +355,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserID", "Email", "FirstName", "LastName", "Password", "UserName" },
+                columns: new[] { "UserID", "FirstName", "LastName" },
                 values: new object[,]
                 {
-                    { new Guid("8daa3821-3685-4299-a172-4bbf18929a73"), "user@user.com", "User", "Resu", "user1", "user1" },
-                    { new Guid("bd500ce6-dee1-4445-a214-410829db561b"), "john.reese@machine.com", "John", "Reese", "john", "John" }
+                    { new Guid("8daa3821-3685-4299-a172-4bbf18929a73"), "Master", "User" },
+                    { new Guid("bd500ce6-dee1-4445-a214-410829db561b"), "John", "Reese" }
                 });
 
             migrationBuilder.InsertData(
@@ -557,18 +554,6 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                 name: "IX_Transactions_UserID",
                 table: "Transactions",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_UserName",
-                table: "Users",
-                column: "UserName",
-                unique: true);
         }
 
         /// <inheritdoc />

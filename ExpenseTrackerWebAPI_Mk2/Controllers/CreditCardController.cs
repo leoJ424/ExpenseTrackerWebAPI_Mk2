@@ -25,6 +25,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets card Ids of current user
+        /// </summary>
+        /// <returns></returns>
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Guid>))]
         [ProducesResponseType(400)]

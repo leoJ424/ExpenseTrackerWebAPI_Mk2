@@ -1573,10 +1573,6 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1585,26 +1581,12 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UserID");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
 
                     b.ToTable("Users");
 
@@ -1612,22 +1594,16 @@ namespace ExpenseTrackerWebAPI_Mk2.Migrations
                         new
                         {
                             UserID = new Guid("8daa3821-3685-4299-a172-4bbf18929a73"),
-                            Email = "user@user.com",
-                            FirstName = "User",
-                            LastName = "Resu",
-                            Password = "user1",
-                            Status = false,
-                            UserName = "user1"
+                            FirstName = "Master",
+                            LastName = "User",
+                            Status = false
                         },
                         new
                         {
                             UserID = new Guid("bd500ce6-dee1-4445-a214-410829db561b"),
-                            Email = "john.reese@machine.com",
                             FirstName = "John",
                             LastName = "Reese",
-                            Password = "john",
-                            Status = false,
-                            UserName = "John"
+                            Status = false
                         });
                 });
 
