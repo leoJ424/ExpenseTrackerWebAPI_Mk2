@@ -33,6 +33,21 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(categories);
         }
 
+        //Adding this so that when the user wants to create a transaction only data sent is the category name and nothing else(i.e status codes and Guids). Also easier to implement in flutter this way...lol.
+        [HttpGet("categoryNames")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<string>))]
+        [ProducesResponseType(400)]
+        public IActionResult GetCategoryNames()
+        {
+            var categoryNames = _categoryRepository.GetAvailableCategoryNames();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(categoryNames);
+        }
+
         [HttpGet("{categoryID}")]
         [ProducesResponseType(200, Type = typeof(string))]
         [ProducesResponseType(400)]

@@ -43,5 +43,12 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         {
             return _context.Categories.Where(c => c.CategoryName == categoryName && c.Status == true).Select(c => c.CategoryID).FirstOrDefault();
         }
+
+        public ICollection<string> GetAvailableCategoryNames()
+        {
+            return _context.Categories.Where(c => c.Status == true)
+                                      .OrderBy(c => c.CategoryName)
+                                      .Select(c => c.CategoryName).ToList();
+        }
     }
 }
