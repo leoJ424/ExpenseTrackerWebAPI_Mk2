@@ -72,6 +72,22 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             return Ok(recipientId);
         }
 
+        //Adding this so that when the user wants to create a transaction only data sent is the recipient name and nothing else(i.e status codes and Guids). Also easier to implement in flutter this way...lol.
+        [HttpGet("recipientNames")]
+        [ProducesResponseType(200, Type = typeof(string))]
+        [ProducesResponseType(400)]
+        public IActionResult GetRecipientNames()
+        {
+            var recipientNames = _recipientRepository.GetAvailableRecipientNames();
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(recipientNames);
+        }
+
+
+
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

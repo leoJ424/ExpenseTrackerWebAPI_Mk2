@@ -10,6 +10,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
         bool RecipientExists(Guid recipientId);
         bool RecipientExists(string recipientName);
 
+        ICollection<string> GetAvailableRecipientNames();
+
         //Create
         bool CreateRecipient(Recipient recipient);
         bool Save();

@@ -38,6 +38,13 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
             return _context.Recipients.Any(r => r.RecipientName == recipientName && r.Status == true);
         }
 
+        public ICollection<string> GetAvailableRecipientNames()
+        {
+            return _context.Recipients.Where(r => r.Status == true)
+                                      .OrderBy(r => r.RecipientName)
+                                      .Select(r => r.RecipientName).ToList();
+        }
+
         public bool CreateRecipient(Recipient recipient)
         {
             _context.Add(recipient);
