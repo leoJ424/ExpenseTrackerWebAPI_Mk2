@@ -7,6 +7,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
         ICollection<Guid> GetCardIdsOfUser(Guid userId);
         CreditCard GetCardDetails(Guid creditCardId);
         CreditCard GetMaskedCardDetails(Guid creditCardId);
+        Guid GetCardOwner(Guid creditCardId);
         string GetCardNumber(Guid creditCardId);
         string GetCardName(Guid creditCardId);
         bool CreditCardExists(Guid creditCardId);

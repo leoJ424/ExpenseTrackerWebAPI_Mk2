@@ -20,6 +20,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Helper
             CreateMap<TransactionDetailsDto, Transaction>();
             
             CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

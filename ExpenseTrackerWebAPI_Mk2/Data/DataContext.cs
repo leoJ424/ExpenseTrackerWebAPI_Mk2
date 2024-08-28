@@ -1,9 +1,11 @@
 ﻿using ExpenseTrackerWebAPI_Mk2.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTrackerWebAPI_Mk2.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<IdentityUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -19,6 +21,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             #region Bank Table
 
             modelBuilder.Entity<Bank>()
@@ -145,13 +149,13 @@ namespace ExpenseTrackerWebAPI_Mk2.Data
 
             #region User Table
 
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.UserName)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(u => u.UserName)
+            //    .IsUnique();
 
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.Email)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(u => u.Email)
+            //    .IsUnique();
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Status)
@@ -245,8 +249,8 @@ namespace ExpenseTrackerWebAPI_Mk2.Data
 
             modelBuilder.Entity<User>()
                 .HasData(
-                    new User { UserID = new Guid("8DAA3821-3685-4299-A172-4BBF18929A73"), UserName = "admin", Password = "admin", FirstName = "Admin", LastName = "Nimda", Email = "admin@admin.com" },
-                    new User { UserID = new Guid("BD500CE6-DEE1-4445-A214-410829DB561B"), UserName = "John", Password = "john", FirstName = "John", LastName = "Reese", Email = "john.reese@machine.com" }
+                    new User { UserID = new Guid("8DAA3821-3685-4299-A172-4BBF18929A73"), FirstName = "Master", LastName = "User"},
+                    new User { UserID = new Guid("BD500CE6-DEE1-4445-A214-410829DB561B"), FirstName = "John", LastName = "Reese"}
                 );
 
             #endregion

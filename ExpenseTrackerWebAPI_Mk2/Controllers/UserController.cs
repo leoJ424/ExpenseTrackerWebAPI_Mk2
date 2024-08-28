@@ -3,6 +3,7 @@ using ExpenseTrackerWebAPI_Mk2.Dto;
 using ExpenseTrackerWebAPI_Mk2.Interfaces;
 using ExpenseTrackerWebAPI_Mk2.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ExpenseTrackerWebAPI_Mk2.Controllers
 {
@@ -19,39 +20,78 @@ namespace ExpenseTrackerWebAPI_Mk2.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        [ProducesResponseType(204)]
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromBody] UserDto userCreate)
+        public IActionResult GetCurrentUserDetails()
         {
-            if (userCreate == null)
+            var authHeader = Request.Headers.Authorization.FirstOrDefault();
+            if (authHeader == null || !authHeader.StartsWith("Bearer "))
             {
-                return BadRequest(ModelState);
+                return Unauthorized("Authorization Header missing or irrelevent");
             }
 
-            var user = _userRepository.GetAllUsers()
-                                      .Where(u => u.UserName.Trim().ToUpper() == userCreate.UserName.ToUpper()).FirstOrDefault();
+            var token = authHeader.Substring(7).Trim(); //7 beacuse "Bearer " has 7 characters
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var claimUserId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userID")?.Value;
+            var claimUserName = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
 
-            if (user != null)
+            if (claimUserId == null)
             {
-                ModelState.AddModelError("", "User already exists");
-                return StatusCode(422, ModelState);
+                return Unauthorized("User ID not found in token");
             }
+
+            if (claimUserName == null)
+            {
+                return Unauthorized("User Name not found in token");
+            }
+
+            var result = _mapper.Map<UserDto>(_userRepository.GetUserById(new Guid(claimUserId)));
+            result.UserName = claimUserName;
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var userMap = _mapper.Map<User>(userCreate);
-            userMap.Status = true; //Set true by default. Otherwise false is set as default when object is created.
-
-            if (!_userRepository.CreateUser(userMap))
-            {
-                ModelState.AddModelError("", "Something went wrong while saving.");
-                return StatusCode(500, ModelState);
-            }
-            return Ok("Successfully Created");
+            return Ok(result);
         }
+
+        ///Commenting out as no longer do we need to create a user. It is taken care in accounts controller under register a user
+        //[HttpPost]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public IActionResult CreateUser([FromBody] UserDto userCreate)
+        //{
+        //    if (userCreate == null)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var user = _userRepository.GetAllUsers()
+        //                              .Where(u => u.UserName.Trim().ToUpper() == userCreate.UserName.ToUpper()).FirstOrDefault();
+
+        //    if (user != null)
+        //    {
+        //        ModelState.AddModelError("", "User already exists");
+        //        return StatusCode(422, ModelState);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var userMap = _mapper.Map<User>(userCreate);
+        //    userMap.Status = true; //Set true by default. Otherwise false is set as default when object is created.
+
+        //    if (!_userRepository.CreateUser(userMap))
+        //    {
+        //        ModelState.AddModelError("", "Something went wrong while saving.");
+        //        return StatusCode(500, ModelState);
+        //    }
+        //    return Ok("Successfully Created");
+        //}
     }
 }

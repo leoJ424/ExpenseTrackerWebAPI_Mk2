@@ -8,6 +8,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Interfaces
         bool CategoryExists (Guid categoryId);
         string GetCategoryName(Guid categoryId);
         Guid GetCategoryId(string categoryName);
+        ICollection<string> GetAvailableCategoryNames();
         bool CreateCategory(Category category);
         bool Save();
     }

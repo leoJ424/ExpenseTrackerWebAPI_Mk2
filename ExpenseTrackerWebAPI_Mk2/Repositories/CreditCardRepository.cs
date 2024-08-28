@@ -15,6 +15,7 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
         public ICollection<Guid> GetCardIdsOfUser(Guid userId)
         {
             return _context.CreditCards.Where(cc => cc.UserID == userId && cc.Status == true)
+                                       .OrderBy(cc => cc.CardName)
                                        .Select(cc => cc.CreditCardID).ToList();
         }
 
@@ -49,6 +50,11 @@ namespace ExpenseTrackerWebAPI_Mk2.Repositories
                 card.CVC = 0;
             }
             return card;
+        }
+
+        public Guid GetCardOwner(Guid creditCardId)
+        {
+            return _context.CreditCards.Where(cc => cc.CreditCardID == creditCardId && cc.Status == true).Select(cc => cc.UserID).FirstOrDefault();
         }
 
         public string GetCardName(Guid creditCardId)
